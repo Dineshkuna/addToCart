@@ -1,9 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/cartSlice";
 
 const ProductList = () => {
   const [product, setProduct] = useState([]);
+  const dispatch = useDispatch();
 
   // https://fakestoreapi.com/products
   useEffect(() => {
@@ -23,7 +26,7 @@ const ProductList = () => {
           <p className="text-left font-bold mt-2 ">Rating : {item.rating.rate} ⭐ </p>
           <p className="text-left mt-2 "> {item.description}</p>
           <p className="text-red-600 font-bold mt-2 ">Price : ${item.price}</p>
-          <button className="mt-4 bg-blue-500 text-black px-4 py-2 rounded ">Add to cart</button>
+          <button className="mt-4 bg-blue-500 text-black px-4 py-2 rounded " onClick={()=> dispatch(addToCart(item))} >Add to cart</button>
         </div>
       ))}
     </div>
